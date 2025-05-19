@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# 💬 ChatApp – Firebase + WebSocket AI Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based chat application that allows users to create multiple chat sessions and interact with an AI assistant in real-time using WebSocket. Messages are stored and synced with Firebase Firestore.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- 🔥 Firebase Firestore integration for real-time message storage
+- 🔁 Real-time updates using Firestore `onSnapshot`
+- 🌐 WebSocket connection to a remote AI assistant
+- 💬 Multiple chat sessions support
+- 🧠 Smart UI for AI responses (bill summaries with paid/unpaid indicators)
+- 🗑️ Chat deletion with message cleanup
+- ⏳ Message sending states and validations
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Tech Stack
 
-### `npm test`
+| Technology      | Usage                          |
+|-----------------|--------------------------------|
+| React           | Frontend Framework             |
+| Firebase Firestore | Real-time database           |
+| Firebase SDK    | Firestore interactions         |
+| WebSocket       | Communication with AI backend  |
+| JavaScript (ES6)| Core application logic         |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🔧 Setup & Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the Repository**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/bartutaskin/SE4458-AI-CHAT-APP.git
+cd SE4458-AI-CHAT-APP
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Firebase Configuration**
+Replace the content of firebase.js with your Firebase project config:
+```bash
+// firebase.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "..."
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Run the App**
+```bash
+npm start
+```
 
-## Learn More
+## 💡 How It Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Chat Initialization
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Click "New Chat" to create a new Firestore chat document.
 
-### Code Splitting
+### 2. Messaging
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* Messages are stored in subcollections (chats/{chatId}/messages).
 
-### Analyzing the Bundle Size
+* User messages are sent over WebSocket to the AI server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* AI responses are received via WebSocket and stored in Firestore.
 
-### Making a Progressive Web App
+### 3. Message Display
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* All messages are streamed using onSnapshot for real-time updates.
 
-### Advanced Configuration
+* Special UI rendering for bill summaries (structured replies from AI).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 4. Delete Chat
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Deletes the chat document and its messages from Firestore.
