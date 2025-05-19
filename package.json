@@ -1,6 +1,6 @@
 {
   "name": "ai-agent-chat",
-  "homepage": "https://bartutaskin.github.io/SE4458-AI-AGENT",
+  "homepage": "https://bartutaskin.github.io/SE4458-AI-CHAT-APP",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
