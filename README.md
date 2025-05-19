@@ -91,3 +91,17 @@ npm start
 ### 4. Delete Chat
 
 * Deletes the chat document and its messages from Firestore.
+
+
+## 🔗 Related Repositories
+
+This project integrates with and depends on the following repositories:
+
+- [SE4458-AI-AGENT](https://github.com/bartutaskin/SE4458-AI-AGENT)  
+  *AI agent backend that processes user queries and interacts with billing APIs.*
+
+- [MobileProviderAPI](https://github.com/bartutaskin/MobileProviderAPI)  
+  *Backend APIs for billing, querying, and payment functionality.*
+
+- [SE4458-API-GATEWAY](https://github.com/bartutaskin/SE4458-API-GATEWAY)  
+  *API Gateway that routes requests between frontend, AI agent, and backend APIs.*
